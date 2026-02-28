@@ -19,6 +19,7 @@
 ## Exit Criteria
 - All P0 and P1 scenarios pass
 - P2 failures documented with known limitations
+- CI pipeline run linked in release/test evidence
 
 ## Priority Legend
 - P0: Critical business path
