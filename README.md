@@ -1,7 +1,7 @@
 # Microsoft Teams Integration Web App
 
 A professional TypeScript + React + Vite web application demonstrating Microsoft Teams integration feasibility.
-
+change1
 ## Project Structure
 
 ```
