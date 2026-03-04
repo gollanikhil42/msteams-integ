@@ -25,9 +25,11 @@ describe('Dashboard', () => {
   await userEvent.click(screen.getByRole('button', { name: /^create$/i }));
 
   console.log('   → Checking task appears in the list...')
-  expect(
+  
+  /*expect(
     await screen.findByText('Write automated tests')
-  ).toBeInTheDocument();
+  ).toBeInTheDocument();*/
+  expect(await screen.findByText('This text does not exist')).toBeInTheDocument();
 
   console.log('   ✅ RESULT: Task "Write automated tests" visible on screen — creation works')
 });
