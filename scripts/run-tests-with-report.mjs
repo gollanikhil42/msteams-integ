@@ -103,7 +103,23 @@ const createWorkbook = (rows, result) => {
   ];
   xlsx.utils.book_append_sheet(workbook, detailsSheet, 'Test Results');
 
-  xlsx.writeFile(workbook, excelReportPath);
+  try {
+    xlsx.writeFile(workbook, excelReportPath);
+    return excelReportPath;
+  } catch (error) {
+    if (error && (error.code === 'EBUSY' || error.code === 'EPERM')) {
+      const fallbackPath = path.join(
+        reportsDir,
+        `test-report-${Date.now()}.xlsx`
+      );
+      xlsx.writeFile(workbook, fallbackPath);
+      console.warn(
+        `Primary report file is locked (${excelReportPath}). Wrote fallback report: ${fallbackPath}`
+      );
+      return fallbackPath;
+    }
+    throw error;
+  }
 };
 
 const main = async () => {
@@ -145,9 +161,9 @@ const main = async () => {
   }
 
   const rows = toRows(parsed);
-  createWorkbook(rows, parsed);
+  const writtenReportPath = createWorkbook(rows, parsed);
 
-  console.log(`Excel report generated: ${excelReportPath}`);
+  console.log(`Excel report generated: ${writtenReportPath}`);
   process.exit(exitCode);
 };
 

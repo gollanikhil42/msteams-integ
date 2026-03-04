@@ -72,9 +72,19 @@ describe('App', () => {
   console.log('   → Sign In button found, simulating user click...')
   await userEvent.click(signInButton);
 
+  const loginCall = mockAuthService.login.mock.results[0];
+  const loginResolvedValue = loginCall ? await loginCall.value : undefined;
+  expect(
+    loginResolvedValue,
+    'Expected mockAuthService.login() to resolve TRUE for this success-path test. If it resolves FALSE, dashboard will not render.'
+  ).toBe(true);
+
   console.log('   → Waiting for Dashboard to appear...')
   await waitFor(() => {
-    expect(screen.getByText('Mock Dashboard')).toBeInTheDocument();
+    expect(
+      screen.getByText('Mock Dashboard'),
+      'Dashboard not found because authentication state stayed false. Check login mock return value and app auth flow.'
+    ).toBeInTheDocument();
   });
 
   console.log('   ✅ RESULT: Dashboard rendered — login flow works end to end')

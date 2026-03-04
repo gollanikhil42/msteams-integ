@@ -26,11 +26,9 @@ describe('Dashboard', () => {
 
   console.log('   → Checking task appears in the list...')
   
-  /*expect(
+  expect(
     await screen.findByText('Write automated tests')
-  ).toBeInTheDocument();*/
-  expect(await screen.findByText('This text does not exist')).toBeInTheDocument();
-
+  ).toBeInTheDocument();
   console.log('   ✅ RESULT: Task "Write automated tests" visible on screen — creation works')
 });
 
