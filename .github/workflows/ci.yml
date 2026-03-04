@@ -26,4 +26,14 @@ jobs:
         run: npm run build
 
       - name: Run tests
-        run: npm run test:run
+        run: npm run test:report
+
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: |
+            reports/test-report.xlsx
+            reports/vitest-results.json
+          if-no-files-found: warn

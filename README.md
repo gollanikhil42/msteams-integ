@@ -77,11 +77,28 @@ npm run test:run
 npm run test:coverage
 ```
 
+```bash
+npm run test:report
+```
+
+`test:report` creates:
+- `reports/vitest-results.json`
+- `reports/test-report.xlsx`
+
+Excel report columns:
+- Test About
+- Status
+- Reason
+- Next Steps Triggered
+- Suite
+- File
+
 ## Testing Assets
 
 - Manual checklist: `docs/testing/manual-test-checklist.md`
 - Automation strategy: `docs/testing/automation-strategy.md`
 - CI workflow: `.github/workflows/ci.yml`
+- CI test report artifact: `test-reports` (download from GitHub Actions run)
 
 ## How to Integrate Real Microsoft Teams
 
