@@ -68,6 +68,14 @@ npm run build
 npm run test
 ```
 
+Runs tests and generates report files (`reports/test-report.xlsx` and `reports/vitest-results.json`).
+
+```bash
+npm run test:watch
+```
+
+Runs Vitest in watch mode for local development.
+
 ```bash
 npm run test:run
 ```

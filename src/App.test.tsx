@@ -60,7 +60,7 @@ describe('App', () => {
   console.log('   → Mocking: trySilentLogin() = FALSE, login() = TRUE')
 
   mockAuthService.trySilentLogin.mockResolvedValue(false);
-  mockAuthService.login.mockResolvedValue(false);
+  mockAuthService.login.mockResolvedValue(true);
 
   console.log('   → Action: Rendering App, then clicking Sign In button...')
   render(<App />);
