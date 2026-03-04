@@ -13,6 +13,7 @@ export default defineConfig(({ mode }) => ({
     environment: 'jsdom',
     setupFiles: './src/test/setupTests.ts',
     css: true,
+    reporters: ['verbose'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html'],

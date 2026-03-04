@@ -2,7 +2,7 @@
 
 A professional TypeScript + React + Vite web application demonstrating Microsoft Teams integration feasibility.
 ## Project Structure
-
+fdgfdg
 ```
 ├── src/
 │   ├── components/          # React components

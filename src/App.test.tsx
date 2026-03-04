@@ -37,24 +37,46 @@ describe('App', () => {
   });
 
   it('shows sign-in screen when silent login fails', async () => {
-    mockAuthService.trySilentLogin.mockResolvedValue(false);
+  console.log('\n📋 TEST: Silent login check')
+  console.log('   → Situation: User opens app, no previous session exists')
+  console.log('   → Mocking: trySilentLogin() returns FALSE (not logged in)')
 
-    render(<App />);
+  mockAuthService.trySilentLogin.mockResolvedValue(false);
 
-    expect(await screen.findByRole('button', { name: /sign in with microsoft/i })).toBeInTheDocument();
+  console.log('   → Action: Rendering App component...')
+  render(<App />);
+
+  console.log('   → Waiting for Sign In button to appear...')
+  expect(
+    await screen.findByRole('button', { name: /sign in with microsoft/i })
+  ).toBeInTheDocument();
+
+  console.log('   ✅ RESULT: Sign In button visible — correct, user must log in manually')
   });
 
   it('logs in and renders dashboard', async () => {
-    mockAuthService.trySilentLogin.mockResolvedValue(false);
-    mockAuthService.login.mockResolvedValue(true);
+  console.log('\n📋 TEST: Full login flow')
+  console.log('   → Situation: User clicks Sign In, Microsoft login succeeds')
+  console.log('   → Mocking: trySilentLogin() = FALSE, login() = TRUE')
 
-    render(<App />);
+  mockAuthService.trySilentLogin.mockResolvedValue(false);
+  mockAuthService.login.mockResolvedValue(true);
 
-    const signInButton = await screen.findByRole('button', { name: /sign in with microsoft/i });
-    await userEvent.click(signInButton);
+  console.log('   → Action: Rendering App, then clicking Sign In button...')
+  render(<App />);
 
-    await waitFor(() => {
-      expect(screen.getByText('Mock Dashboard')).toBeInTheDocument();
-    });
+  const signInButton = await screen.findByRole('button', {
+    name: /sign in with microsoft/i
+  });
+
+  console.log('   → Sign In button found, simulating user click...')
+  await userEvent.click(signInButton);
+
+  console.log('   → Waiting for Dashboard to appear...')
+  await waitFor(() => {
+    expect(screen.getByText('Mock Dashboard')).toBeInTheDocument();
+  });
+
+  console.log('   ✅ RESULT: Dashboard rendered — login flow works end to end')
   });
 });
