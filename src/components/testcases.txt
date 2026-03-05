@@ -1,0 +1,18 @@
+expect(await screen.findByText('This text does not exist')).toBeInTheDocument();
+// Empty State Test
+mockGraphService.getUserTeams.mockRejectedValue(
+    new Error('Something broke')
+);
+// Send Message Test
+mockGraphService.sendChannelMessage.mockRejectedValue(
+    new Error('Failed to send message — network error')
+  );
+
+mockGraphService.getUserTeams.mockResolvedValue([
+    { id: 'WRONG-TEAM-ID', displayName: 'Engineering',  // ← wrong id
+      description: 'Core team', visibility: 'private', memberCount: 5 }
+  ]);
+  
+//License Error Test
+mockGraphService.getUserTeams.mockRejectedValue(
+    new Error('Some completely different error'));  

@@ -36,7 +36,9 @@ describe('TeamsIntegrationPanel', () => {
   console.log('   → Mocking: getUserTeams() returns [] (empty array)')
 
   mockGraphService.getUserTeams.mockResolvedValue([]);
-
+  /*mockGraphService.getUserTeams.mockRejectedValue(
+    new Error('Something broke')
+);*/
   console.log('   → Action: Rendering TeamsIntegrationPanel...')
   render(<TeamsIntegrationPanel />);
 
@@ -101,6 +103,8 @@ describe('TeamsIntegrationPanel', () => {
   mockGraphService.getUserTeams.mockRejectedValue(
     new Error('Failed to get license information for the user')
   );
+  /*mockGraphService.getUserTeams.mockRejectedValue(
+    new Error('Some completely different error')); */
 
   console.log('   → Action: Rendering panel — error should be caught gracefully...')
   render(<TeamsIntegrationPanel />);
